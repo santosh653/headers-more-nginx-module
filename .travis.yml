@@ -1,6 +1,7 @@
 arch:
   - amd64
   - ppc64le
+  
 sudo: required
 dist: trusty
 
@@ -45,10 +46,10 @@ install:
 before_script:
  Include:
   arch: amd64
-  - cd luajit2/
-  - make -j$JOBS CCDEBUG=-g Q= PREFIX=$LUAJIT_PREFIX CC=$CC XCFLAGS='-DLUA_USE_APICHECK -DLUA_USE_ASSERT -msse4.2' > build.log 2>&1 || (cat build.log && exit 1)
-  - sudo make install PREFIX=$LUAJIT_PREFIX > build.log 2>&1 || (cat build.log && exit 1)
-  - cd ..
+   - cd luajit2/
+   - make -j$JOBS CCDEBUG=-g Q= PREFIX=$LUAJIT_PREFIX CC=$CC XCFLAGS='-DLUA_USE_APICHECK -DLUA_USE_ASSERT -msse4.2' > build.log 2>&1 || (cat build.log && exit 1)
+   - sudo make install PREFIX=$LUAJIT_PREFIX > build.log 2>&1 || (cat build.log && exit 1)
+   - cd ..
 
 script:
   - export PATH=$PWD/work/nginx/sbin:$PWD/nginx-devel-utils:$PATH
